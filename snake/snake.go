@@ -46,6 +46,7 @@ func NewSnake() Snake {
 }
 
 func (s *Snake) Play() {
+	ch := make(chan int)
 	go func() {
 		for {
 			if s.status != "pending" {
@@ -55,6 +56,7 @@ func (s *Snake) Play() {
 			s.step()
 		}
 		fmt.Println(s.status)
+		<-ch
 		os.Exit(0)
 	}()
 
